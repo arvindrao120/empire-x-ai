@@ -18,6 +18,10 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
+
+console.log(process.env.FACEBOOK_APP_ID);
+console.log(process.env.FACEBOOK_APP_SECRET);
+
 passport.use(
   new FacebookStrategy(
     {

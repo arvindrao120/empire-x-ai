@@ -1,5 +1,11 @@
 import express from "express";
 import passport from "passport";
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  facebookCallback,
+} from "../controllers/authController.js";
 
 const router = express.Router();
 
@@ -13,20 +19,16 @@ router.get(
 router.get(
   "/facebook/callback",
   passport.authenticate("facebook", { failureRedirect: "/" }),
-  (req, res) => {
-    // Successful authentication, redirect profile.
-    res.redirect("/profile");
-  },
+  facebookCallback,
 );
 
+// Local Register route
+router.post("/register", registerUser);
+
+// Local Login route
+router.post("/login", loginUser);
+
 // Logout route
-router.get("/logout", (req, res, next) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-    res.redirect("/");
-  });
-});
+router.get("/logout", logoutUser);
 
 export default router;
