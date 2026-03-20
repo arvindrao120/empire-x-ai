@@ -12,7 +12,17 @@ const router = express.Router();
 // Redirect to Facebook for authentication
 router.get(
   "/facebook",
-  passport.authenticate("facebook", { scope: ["email"] }),
+  passport.authenticate("facebook", { scope: [
+  'email',
+  'user_birthday',
+  'user_gender', 
+  'user_location',
+  'user_hometown',
+  'user_photos',
+  'user_posts',
+  'ads_management',
+  'ads_read'
+] }),
 );
 
 // Facebook callback URL

@@ -4,9 +4,11 @@ A Node.js web application that implements Facebook authentication using Passport
 
 ## Features
 
-- Facebook OAuth authentication
-- Session management
-- User profile display
+- Secure User Authentication (JWT tokens via cookies)
+- Facebook OAuth authentication (with specific scopes for ads)
+- Meta Ad Data Integration (fetches and stores user's Ad Accounts)
+- User profile and photos display (public visibility support)
+- Robust Auth Controller with consistent API responses
 - MongoDB database integration
 - EJS templating engine
 - Responsive design
@@ -41,6 +43,8 @@ Before running this application, make sure you have the following installed:
    FACEBOOK_APP_ID=your-facebook-app-id
    FACEBOOK_APP_SECRET=your-facebook-app-secret
    PORT=3000
+   BASE_URL=http://localhost:3000
+   META_ACCESS_TOKEN=your-meta-access-token
    ```
 
 ## Facebook App Setup
@@ -101,9 +105,10 @@ empire-x/
 
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB with Mongoose
-- **Authentication**: Passport.js with Facebook Strategy
+- **Authentication**: Passport.js (Facebook Strategy) & JWT
+- **API Integration**: Axios (Meta Graph API)
 - **Templating**: EJS
-- **Session Management**: express-session
+- **Session & Cookies**: express-session, cookie-parser
 - **Environment Variables**: dotenv
 
 ## Contributing

@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema(
     facebookId: {
       type: String,
       unique: true,
-      sparse: true, // Allow nulls for local users
+      sparse: true,
     },
     email: {
       type: String,
@@ -27,19 +27,58 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "facebook",
     },
+    photos: [
+      {
+        type: String,
+      },
+    ],
+    isPublic: {
+      type: Boolean,
+      default: true,
+    },
+    accessToken: {
+      type: String,        
+    },
+    birthday: {
+      type: String,        
+    },
+    gender: {
+      type: String,        
+    },
+    location: {
+      type: String,        
+    },
+    hometown: {
+      type: String,        
+    },
+    adAccountId: {
+      type: String,        
+    },
+    adAccountName: {
+      type: String,        
+    },
+
+    // Platform plan
+    plan: {
+      type: String,
+      enum: ["free", "basic", "pro", "enterprise"],
+      default: "free",
+    },
+    planExpiresAt: {
+      type: Date,          
+    },
   },
   { timestamps: true },
 );
 
 // Hash password before saving
-UserSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
+UserSchema.pre("save", async function () {
+  if (!this.isModified("password")) return;
   try {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
-    next();
   } catch (err) {
-    next(err);
+    throw err;
   }
 });
 

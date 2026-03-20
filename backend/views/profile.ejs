@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Facebook Auth</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f2f5;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            margin-bottom: 0.5rem;
+        }
+
+        .info {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        .logout-btn {
+            color: #d9534f;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .photos-section {
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .photos-section h2 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .photos-grid {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .profile-photo {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .no-photos {
+            color: #888;
+            font-style: italic;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Hello, <%= user.displayName %>
+        </h1>
+        <div class="info">
+            <p><strong>ID:</strong>
+                <%= user.facebookId %>
+            </p>
+            <p><strong>Provider:</strong> Facebook</p>
+            <p><strong>Profile is Public:</strong>
+                <%= user.isPublic ? "Yes" : "No" %>
+            </p>
+            
+            <!-- New Facebook Fields -->
+            <% if (user.birthday) { %>
+                <p><strong>Birthday:</strong> <%= user.birthday %></p>
+            <% } %>
+            <% if (user.gender) { %>
+                <p><strong>Gender:</strong> <span style="text-transform: capitalize;"><%= user.gender %></span></p>
+            <% } %>
+            <% if (user.location) { %>
+                <p><strong>Location:</strong> <%= user.location %></p>
+            <% } %>
+            <% if (user.hometown) { %>
+                <p><strong>Hometown:</strong> <%= user.hometown %></p>
+            <% } %>
+            
+            <% if (user.adAccountName || user.adAccountId) { %>
+                <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
+                <p><strong>Meta Ad Account:</strong> <%= user.adAccountName || "Unknown" %></p>
+                <p><strong>Ad Account ID:</strong> <%= user.adAccountId %></p>
+            <% } %>
+        </div>
+
+        <% if (user.isPublic) { %>
+            <div class="photos-section">
+                <h2>Photos</h2>
+                <% if (user.photos && user.photos.length> 0) { %>
+                    <div class="photos-grid">
+                        <% user.photos.forEach(function(photo) { %>
+                            <img src="<%= photo %>" alt="Profile Photo" class="profile-photo">
+                            <% }); %>
+                    </div>
+                    <% } else { %>
+                        <p class="no-photos">No photos available.</p>
+                        <% } %>
+            </div>
+            <% } else { %>
+                <div class="photos-section">
+                    <h2>Photos</h2>
+                    <p class="no-photos">Photos are hidden because the profile is not public.</p>
+                </div>
+                <% } %>
+
+                    <a href="/auth/logout" class="logout-btn">Logout</a>
+    </div>
+</body>
+
+</html>

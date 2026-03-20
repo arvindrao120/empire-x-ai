@@ -6,7 +6,14 @@ import passport from "passport";
 import path from "path";
 import { fileURLToPath } from "url";
 import cookieParser from "cookie-parser";
-// import connectDB from "./utils/db.js";
+import dns from "dns";
+import connectDB from "./utils/db.js";
+import "./config/passport.js";
+import authRoutes from "./routes/auth.js";
+import indexRoutes from "./routes/index.js";
+import authenticateJWT from "./middlewares/authMiddleware.js";
+
+dns.setServers(["1.1.1.1", "8.8.8.8"])
 
 // Convert import.meta.url to __dirname equivalent
 const __filename = fileURLToPath(import.meta.url);
@@ -17,34 +24,15 @@ dotenv.config();
 
 
 // Passport Config
-import "./config/passport.js";
-import authRoutes from "./routes/auth.js";
-import indexRoutes from "./routes/index.js";
-import authenticateJWT from "./middlewares/authMiddleware.js";
+
 
 const app = express();
-console.log("hello");
+
 
 
 // Database Connection
+connectDB()
 
-
-const mongoUri = process.env.MONGO_URI
-console.log(mongoUri);
-
-
-const db = () => mongoose.connect(mongoUri)
-  .then(() => {
-    console.log(" connected successfully");
-  })
-  .catch((error) => {
-    console.log("connection failed", error);
-  });
-
-
-
-
-db()
 
 // Middleware
 app.set("view engine", "ejs");
