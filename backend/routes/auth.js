@@ -5,7 +5,9 @@ import {
   loginUser,
   logoutUser,
   facebookCallback,
+  getMe,
 } from "../controllers/authController.js";
+import authenticateJWT from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
@@ -40,5 +42,8 @@ router.post("/login", loginUser);
 
 // Logout route
 router.get("/logout", logoutUser);
+
+// Get current user route
+router.get("/me", authenticateJWT, getMe);
 
 export default router;

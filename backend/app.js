@@ -12,7 +12,19 @@ import "./config/passport.js";
 import authRoutes from "./routes/auth.js";
 import indexRoutes from "./routes/index.js";
 import authenticateJWT from "./middlewares/authMiddleware.js";
+import cors from 'cors';
 
+
+
+
+const app = express();
+
+
+
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
 dns.setServers(["1.1.1.1", "8.8.8.8"])
 
 // Convert import.meta.url to __dirname equivalent
@@ -25,8 +37,6 @@ dotenv.config();
 
 // Passport Config
 
-
-const app = express();
 
 
 

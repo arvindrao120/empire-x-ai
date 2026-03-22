@@ -1,0 +1,144 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@theme {
+  --color-background: rgb(var(--background));
+  --color-card: rgb(var(--card));
+  --color-cardHover: rgb(var(--card-hover));
+  --color-primary: rgb(var(--primary));
+  --color-primaryDark: rgb(var(--primary-dark));
+  --color-textMain: rgb(var(--text-main));
+  --color-textMuted: rgb(var(--text-muted));
+  --color-sectionAlt: rgb(var(--section-alt));
+  --color-cardAlt: rgb(var(--card-alt));
+  --font-family-sans: 'Inter', system-ui, sans-serif;
+}
+
+/* Light Mode — Red & White */
+:root {
+  --background: 255 255 255;
+  --card: 248 248 248;
+  --card-hover: 240 240 240;
+  --primary: 220 38 38;
+  --primary-dark: 185 28 28;
+  --text-main: 10 10 10;
+  --text-muted: 100 100 110;
+  --border-color: 0 0 0;
+  --border-opacity: 0.08;
+  --section-alt: 245 245 245;
+  --card-alt: 252 252 252;
+}
+
+/* Dark Mode — Red & Black */
+.dark {
+  --background: 8 8 8;
+  --card: 14 14 14;
+  --card-hover: 20 20 20;
+  --primary: 220 38 38;
+  --primary-dark: 185 28 28;
+  --text-main: 255 255 255;
+  --text-muted: 160 160 170;
+  --border-color: 255 255 255;
+  --border-opacity: 0.06;
+  --section-alt: 5 5 5;
+  --card-alt: 18 18 18;
+}
+
+body {
+  background-color: rgb(var(--background));
+  color: rgb(var(--text-main));
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color 300ms ease, color 300ms ease;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, #ff4444, #cc0000);
+}
+
+/* Glass Card */
+.glass-card {
+  background-color: rgb(var(--card) / 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgb(var(--border-color) / var(--border-opacity));
+  transition: background-color 200ms ease, border-color 200ms ease;
+}
+
+.glass-card:hover {
+  background-color: rgb(var(--card-hover) / 0.95);
+}
+
+/* Red Glow Effect */
+.red-glow {
+  box-shadow: 0 0 30px rgb(220 38 38 / 0.3), 0 0 60px rgb(220 38 38 / 0.1);
+}
+
+.red-glow-text {
+  text-shadow: 0 0 20px rgb(220 38 38 / 0.5);
+}
+
+/* Animated Gradient Border */
+.gradient-border {
+  position: relative;
+  border-radius: 16px;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 17px;
+  background: linear-gradient(135deg, #dc2626, #000000, #dc2626);
+  background-size: 200% 200%;
+  animation: borderGlow 3s ease infinite;
+  z-index: -1;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--primary) / 0.5);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--primary));
+}
+
+/* Animations */
+@keyframes borderGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(220 38 38 / 0.4); }
+  50% { box-shadow: 0 0 0 10px rgb(220 38 38 / 0); }
+}
+
+.pulse-red {
+  animation: pulse-red 2s ease infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}

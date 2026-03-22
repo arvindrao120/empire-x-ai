@@ -168,5 +168,28 @@ export const facebookCallback = (req, res) => {
     // For Facebook OAuth, a redirect to frontend URL works best
     const frontendUrl = process.env.FRONTEND_URL || "";
     // Successful authentication, redirect to frontend application
-    res.redirect(`${frontendUrl}/profile`);
+    res.redirect(`${frontendUrl}/dashboard`);
+};
+
+// Get current user controller
+export const getMe = async (req, res, next) => {
+    try {
+        if (!req.user) {
+            return res.status(401).json({
+                success: false,
+                message: "Not authenticated"
+            });
+        }
+        return res.status(200).json({
+            success: true,
+            data: req.user
+        });
+    } catch (err) {
+        console.error("Get Me Error:", err);
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error fetching user details",
+            error: process.env.NODE_ENV === "development" ? err.message : undefined
+        });
+    }
 };
