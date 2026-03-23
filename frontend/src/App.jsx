@@ -3,7 +3,7 @@ import { Landing } from './pages/Landing';
 import { Dashboard } from './pages/Dashboard';
 import { ProtectedRoute } from './components/common/ProtectedRoute';
 import { DashboardLayout } from './components/dashboard/DashboardLayout';
-import Campaigns from './components/dashboard/sidebar/Campaigns';
+import Campaigns from './pages/Campaigns';
 import AIStrategy from './components/dashboard/sidebar/AIStrategy';
 import Analytics from './components/dashboard/sidebar/Analytics';
 import AdAccount from './components/dashboard/sidebar/AdAccount';
