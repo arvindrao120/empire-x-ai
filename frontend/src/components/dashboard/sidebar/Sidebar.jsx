@@ -1,30 +1,35 @@
 import { LogOut, LayoutGrid, Rocket, BrainCircuit, Wallet, BarChart3 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
-import { logout } from '../../api/auth';
+import { useAuth } from '../../../context/AuthContext';
+import { logout } from '../../../api/auth';
 import { motion } from 'framer-motion';
+import { useNavigate,useLocation } from 'react-router-dom';
 
 export const Sidebar = ({ mobile, onClose }) => {
   const { user, setUser } = useAuth();
-  
+
+  const navigate = useNavigate();
+
+  const location = useLocation();
+
   const handleLogout = async () => {
     await logout();
     setUser(null);
-    window.location.href = '/';
+    navigate('/');
   };
 
   const navItems = [
-    { icon: <LayoutGrid size={18} />, label: "Dashboard", active: false },
-    { icon: <Rocket size={18} />, label: "Campaigns", active: true },
-    { icon: <BrainCircuit size={18} />, label: "AI Strategy", active: false },
-    { icon: <Wallet size={18} />, label: "Ad Account", active: false },
-    { icon: <BarChart3 size={18} />, label: "Analytics", active: false },
+    { icon: <LayoutGrid size={18} />, label: "Dashboard", path: "/dashboard" },
+    { icon: <Rocket size={18} />, label: "Campaigns", path: "/campaigns" },
+    { icon: <BrainCircuit size={18} />, label: "AI Strategy", path: "/ai-strategy" },
+    { icon: <Wallet size={18} />, label: "Ad Account", path: "/ad-account" },
+    { icon: <BarChart3 size={18} />, label: "Analytics", path: "/analytics" },
   ];
 
   return (
     <div className={`flex flex-col h-full bg-[#080808] border-r border-white/5 p-6 ${mobile ? 'w-full' : 'w-64 fixed left-0 top-0 h-screen z-40'}`}>
       {/* Mobile Close Button */}
       {mobile && (
-        <button 
+        <button
           onClick={onClose}
           className="absolute top-6 right-6 text-gray-400 hover:text-white"
         >
@@ -35,7 +40,7 @@ export const Sidebar = ({ mobile, onClose }) => {
       {/* Logo & User Info */}
       <div className="mb-10">
         <h1 className="text-2xl font-black text-white tracking-widest mb-8">EMPIRE<span className="text-[#DC2626]">X</span></h1>
-        
+
         <div className="flex items-center gap-3 mb-6 p-2 rounded-xl bg-[#101010] border border-white/5">
           {user?.photos?.[0] ? (
             <img src={user.photos[0]} alt="Avatar" className="w-10 h-10 rounded-lg object-cover bg-white/10" />
@@ -53,28 +58,34 @@ export const Sidebar = ({ mobile, onClose }) => {
 
       {/* Navigation */}
       <nav className="flex-1 space-y-2">
-        {navItems.map((item, idx) => (
-          <button 
+        {navItems.map((item, idx) => {
+          const isActive = location.pathname === item.path;
+          return (
+          <button
             key={idx}
-            className={`w-full flex cursor-pointer items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold transition-all ${item.active ? 'bg-gradient-to-r from-[#DC2626]/20 to-transparent text-[#DC2626] border-l-2 border-[#DC2626]' : 'text-gray-400 hover:text-white hover:bg-white/5 border-l-2 border-transparent'}`}
+            onClick={() => {
+              navigate(item.path);
+              if (mobile && onClose) onClose();
+            }}
+            className={`w-full flex cursor-pointer items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold transition-all ${isActive ? 'bg-gradient-to-r from-[#DC2626]/20 to-transparent text-[#DC2626] border-l-2 border-[#DC2626]' : 'text-gray-400 hover:text-white hover:bg-white/5 border-l-2 border-transparent'}`}
           >
             {item.icon}
             {item.label}
           </button>
-        ))}
+        )})}
       </nav>
 
       {/* Footer Actions */}
       <div className="mt-auto flex flex-col gap-3">
-        <motion.button 
+        <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-[#DC2626] text-white cursor-pointer text-sm font-bold uppercase tracking-wider hover:bg-red-700 transition-colors shadow-[0_0_15px_rgba(220,38,38,0.3)]"
         >
           Upgrade Plan
         </motion.button>
-        
-        <button 
+
+        <button
           onClick={handleLogout}
           className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-gray-400 cursor-pointer hover:text-white hover:bg-white/5 transition-all"
         >

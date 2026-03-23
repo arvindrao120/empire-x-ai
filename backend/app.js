@@ -1,6 +1,5 @@
 import dotenv from "dotenv";
 import express from "express";
-import mongoose from "mongoose";
 import session from "express-session";
 import passport from "passport";
 import path from "path";
@@ -13,6 +12,7 @@ import authRoutes from "./routes/auth.js";
 import indexRoutes from "./routes/index.js";
 import authenticateJWT from "./middlewares/authMiddleware.js";
 import cors from 'cors';
+import aiRoutes from './routes/ai.js';
 
 
 
@@ -76,6 +76,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use("/auth", authRoutes);
+app.use("/api/ai", aiRoutes);
 app.use("/", indexRoutes);
 
 const PORT = process.env.PORT || 3000;
