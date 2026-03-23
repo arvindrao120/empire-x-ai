@@ -103,4 +103,5 @@ empire-x-ai/
 * Meta OAuth tokens are processed directly server-side and are NEVER needlessly exposed to client JavaScript. 
 
 ---
-_Built to redefine automation._
+**Author:** Arvind Yadav  
+
