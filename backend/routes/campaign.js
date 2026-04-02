@@ -1,10 +1,11 @@
 import express from 'express';
-import { generateStrategy } from '../controllers/aiStrategyController.js';
+import { createCampaign, getCampaigns } from '../controllers/campaignController.js';
 import authenticateJWT from '../middlewares/authMiddleware.js';
 import { protect } from '../middlewares/protectedMiddleware.js';
 
 const router = express.Router();
 
-router.post('/generate-strategy', authenticateJWT, protect, generateStrategy);
+router.post('/create', authenticateJWT, protect, createCampaign);
+router.get('/', authenticateJWT, protect, getCampaigns);
 
 export default router;

@@ -1,5 +1,5 @@
 import { useAuth } from '../../context/AuthContext';
-import { logout } from '../../api/auth';
+import { logout } from '../../api/index';
 
 export const ProfilePopup = ({ onClose }) => {
     const { user, setUser } = useAuth();

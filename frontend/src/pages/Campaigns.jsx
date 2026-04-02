@@ -4,6 +4,10 @@ import { Zap, Target, TrendingUp, Shield, Sparkles, ArrowRight } from 'lucide-re
 import { CampaignStats } from '../components/campaigns/CampaignStats';
 import { AICommandForm } from '../components/campaigns/AICommandForm';
 import { ActiveOperations } from '../components/campaigns/ActiveOperations';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const features = [
   {
@@ -29,6 +33,10 @@ const features = [
 ];
 
 export const Campaigns = () => {
+  const [strategy, setStrategy] = useState(null);
+
+  const navigate = useNavigate();
+
   return (
     <>
       {/* Header */}
@@ -75,7 +83,7 @@ export const Campaigns = () => {
             🚀 Why EmpireX Campaigns?
           </h2>
           <p className="text-xs text-gray-400 max-w-xl">
-            EmpireX uses advanced AI to create, manage and optimize your Meta ad campaigns. 
+            EmpireX uses advanced AI to create, manage and optimize your Meta ad campaigns.
             Our platform has helped businesses achieve <span className="text-[#DC2626] font-bold">3x better ROI</span> compared to manual campaign management.
           </p>
         </div>
@@ -92,7 +100,10 @@ export const Campaigns = () => {
         className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6"
       >
         <div className="w-full">
-          <AICommandForm />
+          <AICommandForm onResult={(strategy) => {
+            sessionStorage.setItem('aiStrategy', JSON.stringify(strategy));
+            navigate('/ai-strategy');
+          }} />
         </div>
         <div className="w-full">
           <ActiveOperations />

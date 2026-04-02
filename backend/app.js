@@ -13,6 +13,7 @@ import indexRoutes from "./routes/index.js";
 import authenticateJWT from "./middlewares/authMiddleware.js";
 import cors from 'cors';
 import aiRoutes from './routes/ai.js';
+import campaignRoutes from './routes/campaign.js';
 
 
 
@@ -78,6 +79,7 @@ app.use((req, res, next) => {
 app.use("/auth", authRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/", indexRoutes);
+app.use('/api/campaigns', campaignRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

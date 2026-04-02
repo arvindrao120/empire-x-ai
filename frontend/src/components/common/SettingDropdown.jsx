@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { LogOut, Sun, Moon, User, Shield, HelpCircle } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import { logout } from '../../api/auth';
+import { logout } from '../../api/index';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 

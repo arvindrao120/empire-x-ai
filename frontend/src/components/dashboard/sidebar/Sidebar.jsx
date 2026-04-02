@@ -1,6 +1,6 @@
 import { LogOut, LayoutGrid, Rocket, BrainCircuit, Wallet, BarChart3, TrendingUp } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
-import { logout } from '../../../api/auth';
+import { logout } from '../../../api/index';
 import { motion } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 

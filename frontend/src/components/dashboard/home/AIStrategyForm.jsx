@@ -1,7 +1,7 @@
 import { BrainCircuit, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { generateStrategy } from '../../../api/auth.js';
+import { generateStrategy } from '../../../api/index.js';
 
 export const AIStrategyForm = ({ onResult }) => {
   const [loading, setLoading] = useState(false);

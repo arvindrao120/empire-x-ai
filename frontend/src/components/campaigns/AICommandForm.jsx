@@ -1,10 +1,12 @@
 import { Crosshair, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { createCampaign, generateStrategy } from '../../api/index';
+
 
 const PLACEMENTS = ['Facebook', 'Instagram', 'Messenger', 'WhatsApp', 'Threads', 'Audience Network'];
 
-export const AICommandForm = () => {
+export const AICommandForm = ({ onResult }) => {
   const [formData, setFormData] = useState({
     campaignName: '',
     adSetName: '',
@@ -16,6 +18,7 @@ export const AICommandForm = () => {
     budget: '',
     placements: ['Facebook', 'Instagram'],
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -31,17 +34,38 @@ export const AICommandForm = () => {
     });
   };
 
- const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
-  
-  // Mandatory check
-  if (!formData.campaignName || !formData.adSetName || !formData.location || 
-      !formData.creativeDescription || !formData.budget || formData.placements.length === 0) {
-    alert('Please fill all fields!');
-    return;
+  setLoading(true);
+  try {
+    // Step 1: save Campaign DB 
+    const campaignRes = await createCampaign(formData);
+    console.log('Campaign saved:', campaignRes.data.campaign);
+
+    // Step 2: generate AI Strategy 
+    const strategyRes = await generateStrategy(formData);
+
+    // Step 3: send result to parent component
+    onResult(strategyRes.data.strategy);
+
+    // Step 4: reset form
+    setFormData({
+      campaignName: '',
+      adSetName: '',
+      objective: 'Conversions',
+      location: '',
+      creativeDescription: '',
+      ageMin: 18,
+      ageMax: 65,
+      budget: '',
+      placements: ['Facebook', 'Instagram'],
+    });
+
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setLoading(false);
   }
-  
-  console.log('Campaign Form Data:', formData);
 };
 
   return (
@@ -203,8 +227,8 @@ export const AICommandForm = () => {
               );
             })}
             {formData.placements.length === 0 && (
-  <p className="text-xs text-red-400 mt-1">Select at least one placement!</p>
-)}
+              <p className="text-xs text-red-400 mt-1">Select at least one placement!</p>
+            )}
           </div>
         </div>
 
