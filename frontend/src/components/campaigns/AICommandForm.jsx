@@ -74,14 +74,14 @@ const handleSubmit = async (e) => {
         <div className="w-8 h-8 rounded-lg bg-[#DC2626]/20 flex items-center justify-center text-[#DC2626]">
           <Crosshair size={18} />
         </div>
-        <h2 className="text-lg font-black text-white tracking-widest">AI STRATEGIC COMMAND</h2>
+        <h2 className="text-lg font-black text-white uppercase tracking-widest">AI STRATEGIC COMMAND</h2>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6 flex-1 flex flex-col">
 
         {/* Campaign Name */}
         <div>
-          <label className="block text-[10px] font-bold text-gray-400 tracking-widest uppercase mb-2">Campaign Name</label>
+          <label className="block text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-2">Campaign Name</label>
           <input
             type="text"
             name="campaignName"
@@ -95,7 +95,7 @@ const handleSubmit = async (e) => {
 
         {/* Ad Set Name */}
         <div>
-          <label className="block text-[10px] font-bold text-gray-400 tracking-widest uppercase mb-2">Ad Set Name</label>
+          <label className="block text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-2">Ad Set Name</label>
           <input
             type="text"
             name="adSetName"
@@ -110,7 +110,7 @@ const handleSubmit = async (e) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Objective */}
           <div>
-            <label className="block text-[10px] font-bold text-gray-400 tracking-widest uppercase mb-2">Objective</label>
+            <label className="block text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-2">Objective</label>
             <select
               name="objective"
               value={formData.objective}
@@ -129,7 +129,7 @@ const handleSubmit = async (e) => {
 
           {/* Location */}
           <div>
-            <label className="block text-[10px] font-bold text-gray-400 tracking-widest uppercase mb-2">Location Targeting</label>
+            <label className="block text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-2">Location Targeting</label>
             <input
               type="text"
               name="location"
@@ -144,7 +144,7 @@ const handleSubmit = async (e) => {
 
         {/* Budget */}
         <div>
-          <label className="block text-[10px] font-bold text-gray-400 tracking-widest uppercase mb-2">Daily Budget (INR ₹)</label>
+          <label className="block text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-2">Daily Budget (INR ₹)</label>
           <input
             type="number"
             name="budget"
@@ -158,7 +158,7 @@ const handleSubmit = async (e) => {
 
         {/* Creative Description */}
         <div>
-          <label className="block text-[10px] font-bold text-gray-400 tracking-widest uppercase mb-2">Creative Description</label>
+          <label className="block text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-2">Creative Description</label>
           <textarea
             rows="3"
             name="creativeDescription"
@@ -173,7 +173,7 @@ const handleSubmit = async (e) => {
         {/* Age Range */}
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="block text-[10px] font-bold text-gray-400 tracking-widest uppercase">Age Range</label>
+            <label className="block text-[10px] font-bold text-gray-500 tracking-widest uppercase">Age Range</label>
             <span className="text-[10px] font-bold text-white tracking-widest">{formData.ageMin} - {formData.ageMax}</span>
           </div>
           <div className="grid grid-cols-2 gap-3">
@@ -206,7 +206,7 @@ const handleSubmit = async (e) => {
 
         {/* Placements */}
         <div>
-          <label className="block text-[10px] font-bold text-gray-400 tracking-widest uppercase mb-3">Placements</label>
+          <label className="block text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-3">Placements</label>
           <div className="flex flex-wrap gap-3">
             {PLACEMENTS.map((platform) => {
               const isSelected = formData.placements.includes(platform);
@@ -215,7 +215,7 @@ const handleSubmit = async (e) => {
                   key={platform}
                   type="button"
                   onClick={() => handlePlacement(platform)}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold transition-all border
+                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold tracking-wider uppercase transition-all border
                     ${isSelected
                       ? 'bg-[#DC2626]/20 border-[#DC2626] text-white'
                       : 'bg-transparent border-white/10 text-gray-500 hover:text-white hover:border-white/30'

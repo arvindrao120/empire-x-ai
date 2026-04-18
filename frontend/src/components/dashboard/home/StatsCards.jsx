@@ -23,12 +23,12 @@ export const StatsCards = () => {
             <div className="w-10 h-10 rounded-lg bg-[#DC2626]/10 flex items-center justify-center">
               {stat.icon}
             </div>
-            <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-white/5 text-gray-400 border border-white/10">
+            <span className="text-[9px] font-black tracking-widest uppercase px-2 py-1 rounded-full bg-white/5 text-gray-400 border border-white/10">
               {stat.change}
             </span>
           </div>
           <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">{stat.label}</p>
-          <h3 className="text-3xl font-black text-white">{stat.value}</h3>
+          <h3 className="text-2xl md:text-3xl font-black text-white">{stat.value}</h3>
           
           {/* Subtle red glow on hover */}
           <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-[#DC2626]/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />

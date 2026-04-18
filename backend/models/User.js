@@ -13,6 +13,13 @@ const UserSchema = new mongoose.Schema(
       unique: true,
       sparse: true,
     },
+    username: {
+      type: String,
+      unique: true,
+      sparse: true, 
+      trim: true,
+      lowercase: true
+    },
     password: {
       type: String,
     },

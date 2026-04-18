@@ -4,14 +4,13 @@ A Node.js web application that implements Facebook authentication using Passport
 
 ## Features
 
-- Secure User Authentication (JWT tokens via cookies)
-- Facebook OAuth authentication (with specific scopes for ads)
-- Meta Ad Data Integration (fetches and stores user's Ad Accounts)
-- User profile and photos display (public visibility support)
-- Robust Auth Controller with consistent API responses
-- MongoDB database integration
-- EJS templating engine
-- Responsive design
+- **Production-Ready Secure Authentication:** Robust Auth controller utilizing JWT tokens via cookies with refined API responses.
+- **Facebook OAuth & Meta Graph:** Specialized scopes for ads, automatic syncing of Meta Ad Account parameters upon login.
+- **Campaign Data Modeling:** Deep Mongo schemas for mapping ad sets, budgets, placements, and Facebook/Meta integrations.
+- **User Profiles & Photos:** Integration for public profile visibility and dynamically displaying synced photos.
+- **MongoDB database integration:** via Mongoose to store User and Campaign models.
+- **EJS templating engine**
+- **Responsive design** for immediate viewing components
 
 ## Prerequisites
 
@@ -77,20 +76,28 @@ The application will be available at `http://localhost:3000`
 
 ## Project Structure
 
-```
-empire-x/
+```text
+backend/
 ├── app.js                 # Main application file
 ├── package.json           # Dependencies and scripts
 ├── config/
 │   └── passport.js        # Passport authentication configuration
+├── controllers/
+│   ├── authController.js  # Production-ready authentication handlers
+│   └── campaignController.js # Campaign business logic
+├── middlewares/           # Custom Express middlewares
 ├── models/
-│   └── User.js           # User model schema
+│   ├── Campaign.js        # Campaign and Ads schema
+│   └── User.js            # User model schema
 ├── routes/
-│   └── auth.js           # Authentication routes
+│   ├── ai.js              # AI Strategy Endpoint routes
+│   ├── auth.js            # Authentication routes
+│   └── campaign.js        # Campaign management routes
+├── utils/                 # General backend utilities
 ├── views/
-│   ├── login.ejs         # Login page template
-│   └── profile.ejs       # User profile page template
-└── public/               # Static files (CSS, JS, images)
+│   ├── login.ejs          # Login page template
+│   └── profile.ejs        # User profile page template
+└── README.md              # Backend Documentation
 ```
 
 ## API Endpoints

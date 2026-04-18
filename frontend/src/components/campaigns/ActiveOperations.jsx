@@ -45,8 +45,8 @@ export const ActiveOperations = () => {
             {paginated.map((op) => (
               <tr key={op.id} className="border-b border-white/5 last:border-0 hover:bg-white/[0.02] transition-colors group">
                 <td className="py-4">
-                  <p className="font-bold text-gray-200 group-hover:text-white transition-colors">{op.name}</p>
-                  <p className="text-[10px] text-gray-500 mt-0.5">Created {op.created}</p>
+                  <p className="text-sm text-gray-300 font-semibold group-hover:text-white transition-colors">{op.name}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">Created {op.created}</p>
                 </td>
                 <td className="py-4">
                   <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[9px] font-bold tracking-widest uppercase
@@ -55,8 +55,8 @@ export const ActiveOperations = () => {
                     {op.status}
                   </div>
                 </td>
-                <td className="py-4 font-bold text-gray-300">{op.budget}</td>
-                <td className={`py-4 font-bold ${op.active ? 'text-[#DC2626]' : 'text-gray-500'}`}>{op.ctr}</td>
+                <td className="py-4 text-sm text-gray-300 font-semibold">{op.budget}</td>
+                <td className={`py-4 text-sm font-semibold ${op.active ? 'text-[#DC2626]' : 'text-gray-500'}`}>{op.ctr}</td>
                 <td className="py-4 text-right">
                   <button className="text-gray-500 hover:text-white transition-colors p-1.5 rounded-lg hover:bg-white/5">
                     <MoreVertical size={15} />
@@ -103,10 +103,10 @@ export const ActiveOperations = () => {
 
         {/* Actions */}
         <div className="flex items-center justify-between">
-          <button className="text-[10px] font-bold text-white tracking-widest uppercase hover:text-[#DC2626] transition-colors">
+          <button className="text-xs font-bold tracking-wider uppercase text-white hover:text-[#DC2626] transition-colors">
             View All Operations
           </button>
-          <button className="flex items-center gap-1.5 text-[10px] font-bold text-gray-400 tracking-widest uppercase hover:text-white transition-colors">
+          <button className="flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-gray-400 hover:text-white transition-colors">
             <Download size={12} />
             Export CSV
           </button>

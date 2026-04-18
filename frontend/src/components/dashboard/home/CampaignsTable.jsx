@@ -9,8 +9,8 @@ export const CampaignsTable = () => {
       className="mt-8"
     >
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-white">Active Campaigns</h2>
-        <button className="text-[10px] font-bold text-gray-500 uppercase tracking-widest hover:text-[#DC2626] transition-colors flex items-center gap-1">
+        <h2 className="text-lg font-black text-white uppercase tracking-widest">Active Campaigns</h2>
+        <button className="text-xs font-bold tracking-wider uppercase text-gray-500 hover:text-[#DC2626] transition-colors flex items-center gap-1">
           VIEW ALL <ExternalLink size={12} />
         </button>
       </div>
@@ -36,9 +36,9 @@ export const CampaignsTable = () => {
                     <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-4">
                       <PlusSquare size={24} className="text-white/20" />
                     </div>
-                    <p className="text-sm font-bold text-white mb-1">No Active Campaigns</p>
-                    <p className="text-xs mb-4">You haven't launched any campaigns via EmpireX yet.</p>
-                    <button className="bg-[#DC2626] hover:bg-red-700 text-white text-xs font-bold px-6 py-2.5 rounded-lg flex items-center gap-2 transition-colors shadow-[0_0_15px_rgba(220,38,38,0.2)]">
+                    <p className="text-sm font-black text-white mb-1">No Active Campaigns</p>
+                    <p className="text-xs text-gray-500 mb-4">You haven't launched any campaigns via EmpireX yet.</p>
+                    <button className="bg-[#DC2626] hover:bg-red-700 text-white text-xs font-bold tracking-wider uppercase px-6 py-2.5 rounded-lg flex items-center gap-2 transition-colors shadow-[0_0_15px_rgba(220,38,38,0.2)]">
                       <PlusSquare size={14} />
                       CREATE CAMPAIGN
                     </button>

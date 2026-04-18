@@ -48,8 +48,8 @@ export const Sidebar = ({ mobile, onClose }) => {
             </div>
           )}
           <div className="overflow-hidden">
-            <p className="text-sm font-bold text-white truncate">{user?.displayName || "User"}</p>
-            <p className="text-[10px] text-[#DC2626] font-bold tracking-wider uppercase">{user?.plan || "Free"} Member</p>
+            <p className="text-sm font-black text-white truncate">{user?.displayName || "User"}</p>
+            <p className="text-[9px] font-black tracking-widest uppercase text-[#DC2626]">{user?.plan || "Free"} Member</p>
           </div>
         </div>
 
@@ -61,7 +61,7 @@ export const Sidebar = ({ mobile, onClose }) => {
               <button
                 key={item.path}
                 onClick={() => handleNav(item.path)}
-                className={`w-full flex items-center gap-3 cursor-pointer px-4 py-3 rounded-lg text-sm font-semibold transition-all border-l-2
+                className={`w-full flex items-center gap-3 cursor-pointer px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-all border-l-2
                   ${isActive
                     ? 'bg-gradient-to-r from-[#DC2626]/20 to-transparent text-[#DC2626] border-[#DC2626]'
                     : 'text-gray-400 hover:text-white hover:bg-white/5 border-transparent'
@@ -79,13 +79,13 @@ export const Sidebar = ({ mobile, onClose }) => {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="w-full py-3 cursor-pointer rounded-lg bg-[#DC2626] text-white text-sm font-bold uppercase tracking-wider hover:bg-red-700 transition-colors shadow-[0_0_15px_rgba(220,38,38,0.3)]"
+            className="w-full py-3 cursor-pointer rounded-lg bg-[#DC2626] text-white text-xs font-bold tracking-wider uppercase hover:bg-red-700 transition-colors shadow-[0_0_15px_rgba(220,38,38,0.3)]"
           >
             Upgrade Plan
           </motion.button>
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-3 cursor-pointer px-4 py-3 rounded-lg text-sm font-semibold text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+            className="w-full flex items-center gap-3 cursor-pointer px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase text-gray-400 hover:text-white hover:bg-white/5 transition-all"
           >
             <LogOut size={16} />
             Logout
@@ -109,8 +109,8 @@ export const Sidebar = ({ mobile, onClose }) => {
               </div>
             )}
             <div className="overflow-hidden">
-              <p className="text-sm font-bold text-white truncate">{user?.displayName || "User"}</p>
-              <p className="text-[10px] text-[#DC2626] font-bold tracking-wider uppercase">{user?.plan || "Free"} Member</p>
+              <p className="text-sm font-black text-white truncate">{user?.displayName || "User"}</p>
+              <p className="text-[9px] font-black tracking-widest uppercase text-[#DC2626]">{user?.plan || "Free"} Member</p>
             </div>
           </div>
 
@@ -121,7 +121,7 @@ export const Sidebar = ({ mobile, onClose }) => {
                 <button
                   key={item.path}
                   onClick={() => handleNav(item.path)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold transition-all border-l-2
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase transition-all border-l-2
                     ${isActive
                       ? 'bg-gradient-to-r from-[#DC2626]/20 to-transparent text-[#DC2626] border-[#DC2626]'
                       : 'text-gray-400 hover:text-white hover:bg-white/5 border-transparent'
@@ -137,7 +137,7 @@ export const Sidebar = ({ mobile, onClose }) => {
           <div className="flex flex-col gap-3 mt-auto">
             <button
               onClick={handleLogout}
-              className="w-full flex items-center cursor-pointer gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+              className="w-full flex items-center cursor-pointer gap-3 px-4 py-3 rounded-lg text-xs font-bold tracking-wider uppercase text-gray-400 hover:text-white hover:bg-white/5 transition-all"
             >
               <LogOut size={16} />
               Logout

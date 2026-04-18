@@ -74,3 +74,15 @@ export const generateStrategy = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
+
+export const getStrategies = async (req, res) => {
+  try {
+    const strategies = await AIStrategy.find()
+      .populate("campaign", "campaignName")
+      .sort({ createdAt: -1 });
+
+    res.json({ success: true, strategies });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};  

@@ -51,7 +51,7 @@ export const DashboardLayout = () => {
                   <span
                     key={link.path}
                     onClick={() => navigate(link.path)}
-                    className={`text-xs font-bold cursor-pointer transition-colors ${isActive
+                    className={`text-xs font-bold tracking-wider uppercase cursor-pointer transition-colors ${isActive
                       ? "text-white border-b-2 border-[#DC2626] py-1 mt-1"
                       : "text-gray-500 hover:text-white"
                     }`}

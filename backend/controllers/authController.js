@@ -193,3 +193,44 @@ export const getMe = async (req, res, next) => {
         });
     }
 };
+
+
+// Update Profile controller
+export const updateProfile = async (req, res) => {
+  try {
+    const { displayName, email, username } = req.body;
+    const userId = req.user._id;
+
+    // Email unique check
+    if (email) {
+      const emailExists = await User.findOne({ email, _id: { $ne: userId } });
+      if (emailExists) {
+        return res.status(400).json({ success: false, message: "Email already in use by another account" });
+      }
+    }
+
+    // Username unique check
+    if (username) {
+      const usernameExists = await User.findOne({ username, _id: { $ne: userId } });
+      if (usernameExists) {
+        return res.status(400).json({ success: false, message: "Username already taken" });
+      }
+    }
+
+    const updated = await User.findByIdAndUpdate(
+      userId,
+      { ...(displayName && { displayName }), ...(email && { email }), ...(username && { username }) },
+      { new: true, runValidators: true }
+    ).select('-accessToken -password');
+
+    return res.status(200).json({ success: true, data: updated });
+
+  } catch (err) {
+    console.error("Update Profile Error:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error during profile update",
+      error: process.env.NODE_ENV === "development" ? err.message : undefined
+    });
+  }
+};

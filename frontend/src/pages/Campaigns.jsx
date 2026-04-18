@@ -47,10 +47,10 @@ export const Campaigns = () => {
       >
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl md:text-3xl font-black text-white mb-1 uppercase">
+            <h1 className="text-2xl md:text-3xl font-bold text-white uppercase tracking-wide mb-1">
               Campaigns
             </h1>
-            <p className="text-xs text-gray-500 tracking-widest uppercase">
+            <p className="text-xs text-gray-500 tracking-widest uppercase font-bold">
               Manage Your Ad Campaigns
             </p>
           </div>
@@ -79,15 +79,15 @@ export const Campaigns = () => {
         className="mb-6 bg-gradient-to-r from-[#DC2626]/10 to-transparent border border-[#DC2626]/20 rounded-xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
       >
         <div>
-          <h2 className="text-sm font-black text-white tracking-widest uppercase mb-1">
+          <h2 className="text-lg font-black text-white uppercase tracking-widest mb-1">
             🚀 Why EmpireX Campaigns?
           </h2>
-          <p className="text-xs text-gray-400 max-w-xl">
+          <p className="text-sm text-gray-400 max-w-xl">
             EmpireX uses advanced AI to create, manage and optimize your Meta ad campaigns.
             Our platform has helped businesses achieve <span className="text-[#DC2626] font-bold">3x better ROI</span> compared to manual campaign management.
           </p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#DC2626] text-white text-xs font-bold whitespace-nowrap hover:bg-red-700 transition-colors">
+        <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#DC2626] text-white text-xs font-bold tracking-wider uppercase whitespace-nowrap hover:bg-red-700 transition-colors">
           Learn More <ArrowRight size={13} />
         </button>
       </motion.div>
@@ -97,7 +97,7 @@ export const Campaigns = () => {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6"
+        className="grid grid-cols-1 xl:grid-cols-2 gap-4 mb-6"
       >
         <div className="w-full">
           <AICommandForm onResult={(strategy) => {
@@ -117,7 +117,7 @@ export const Campaigns = () => {
         transition={{ delay: 0.3 }}
         className="mb-6"
       >
-        <h2 className="text-xs font-black text-gray-500 tracking-widest uppercase mb-4">
+        <h2 className="text-lg font-black text-white uppercase tracking-widest mb-4">
           What EmpireX Does For You
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
@@ -133,7 +133,7 @@ export const Campaigns = () => {
                 <feature.icon size={18} className="text-[#DC2626]" />
               </div>
               <h3 className="text-sm font-black text-white mb-2">{feature.title}</h3>
-              <p className="text-xs text-gray-500 leading-relaxed">{feature.desc}</p>
+              <p className="text-sm text-gray-400 leading-relaxed">{feature.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -147,14 +147,14 @@ export const Campaigns = () => {
         className="bg-[#101010] border border-white/5 rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-4"
       >
         <div>
-          <h3 className="text-sm font-black text-white uppercase tracking-widest mb-1">
+          <h3 className="text-lg font-black text-white uppercase tracking-widest mb-1">
             Ready to Scale Your Business?
           </h3>
-          <p className="text-xs text-gray-500">
+          <p className="text-sm text-gray-400">
             Upgrade to Pro and unlock unlimited campaigns, advanced analytics and priority AI support.
           </p>
         </div>
-        <button className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#DC2626] to-[#ec4899] text-white text-xs font-black tracking-widest uppercase shadow-[0_0_20px_rgba(220,38,38,0.3)] hover:shadow-[0_0_30px_rgba(220,38,38,0.5)] transition-all whitespace-nowrap">
+        <button className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#DC2626] to-[#ec4899] text-white text-xs font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(220,38,38,0.3)] hover:shadow-[0_0_30px_rgba(220,38,38,0.5)] transition-all whitespace-nowrap">
           <Sparkles size={14} />
           Upgrade to Pro
         </button>

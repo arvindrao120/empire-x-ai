@@ -4,27 +4,38 @@ Welcome to the Empire X Frontend repository! This project is a highly responsive
 
 ## 🚀 Features
 
-- **Modern UI/UX**: Includes a dark-centric premium design utilizing gradients, glassmorphism, and deep contrast.
-- **Framer Motion Animations**: Smooth page reveals, staggered entrance animations, and interactive hover effects.
-- **Dynamic Theming Support**: Fully functional Light & Dark Mode toggle located in the Navigation bar.
+- **Modern UI/UX Development**: Dark-centric premium aesthetics using gradients and glassmorphism.
+- **Highly Responsive Dashboard**: Deep mobile optimization for dashboard visibility and interactive tracking.
+- **Modular Analytics & AI Strategy Component**: Dynamic grid layout integrating editable AI recommendations alongside stored strategies.
+- **Campaigns Framework**: Dedicated forms, active operation tracking tables, and visually separated metrics mirroring the core platform.
+- **Framer Motion Animations**: Smooth page reveals, staggered entrance animations, and responsive layout transitions on the dashboard.
+- **Consistent Sidemenu Routing**: Standardized layout spanning nested routes.
+- **Dynamic Theming Support**: Fully functional Light & Dark Mode toggle.
 - **Scalable Architecture**: Component-driven architecture using robust, reusable pieces (Buttons, Cards, Content Containers).
-- **Responsive Layout**: Adapts gracefully across desktop, tablet, and mobile devices.
 
 ## 📁 File Structure
 
-The frontend architecture is optimized for a large-scale project:
+The frontend architecture is optimized for a modular React application:
 
-```
+```text
 src/
+├── api/                     # Axios setups for API requests
 ├── assets/                  # Static assets (images, global icons)
 ├── components/              
+│   ├── analytics/           # Data visualizations and animated metric grids
+│   ├── campaigns/           # Elements handling Ad campaigns and data forms
 │   ├── common/              # Highly reusable UI components (Button, Card, ThemeToggle)
+│   ├── dashboard/           # Specific elements mapping the authenticated workspace
+│   │   ├── home/            # Home sub-section rendering AI Strategies and Actions
+│   │   └── sidebar/         # Universal nested route routing
 │   ├── layout/              # Structural shells (Header, Footer, ContentContainer)
-│   └── sections/            # Major page sections (Hero, Features, Pricing, etc.)
-├── pages/                   # Top-level Page components (Landing.jsx)
+│   └── sections/            # Major landing page sections
+├── context/                 # Application Context APIs (AuthContext)
+├── pages/                   # Top-level Page components (Landing, Dashboard, Campaigns)
 ├── utils/                   # Shared helpers 
 │   ├── animations.js        # Global framer-motion variants
 │   └── cn.js                # Tailwind class merging utility (clsx + tailwind-merge)
+├── App.css                  # Main application CSS
 ├── App.jsx                  # Main entry point merging context and pages
 ├── index.css                # Global CSS variables for Theming and Tailwind directives
 └── main.jsx                 # React DOM Renderer
