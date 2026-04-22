@@ -4,7 +4,7 @@ import { Bell, Settings } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import { Sidebar } from './sidebar/Sidebar';
-import { SettingsDropdown } from '../common/SettingDropDown';
+// import { Setting } from '../../pages/Setting';
 
 export const DashboardLayout = () => {
   const { user } = useAuth();
@@ -33,7 +33,7 @@ export const DashboardLayout = () => {
 
         {/* Top Header */}
         <header className="h-20 border-b border-white/5 flex items-center justify-between px-4 md:px-8 bg-[#080808] sticky top-0 z-30">
-          
+
           <div className="flex items-center gap-4 md:gap-8">
             {/* Logo - Mobile Only */}
             <h1
@@ -54,7 +54,7 @@ export const DashboardLayout = () => {
                     className={`text-xs font-bold tracking-wider uppercase cursor-pointer transition-colors ${isActive
                       ? "text-white border-b-2 border-[#DC2626] py-1 mt-1"
                       : "text-gray-500 hover:text-white"
-                    }`}
+                      }`}
                   >
                     {link.label}
                   </span>

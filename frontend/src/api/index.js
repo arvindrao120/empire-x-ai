@@ -17,4 +17,9 @@ export const getStrategies = () => API.get('/api/ai/strategies');
 export const createCampaign = (data) => API.post('/api/campaigns/create', data);
 export const getCampaigns = () => API.get('/api/campaigns');
 
+// Profile
+export const updateProfile = (data) => API.put('/api/user/profile', data);
+
+
+
 export default API;
