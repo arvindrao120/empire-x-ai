@@ -38,10 +38,7 @@ const EditPopup = ({ label, value, note, onSave, onClose }) => {
         />
         {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         <div className="flex gap-3 mt-5">
-          <button onClick={onClose}
-            className="flex-1 border border-gray-700 text-gray-400 hover:text-white py-2 rounded-lg transition text-sm flex items-center justify-center gap-2">
-            <X size={15} /> Cancel
-          </button>
+          
           <button onClick={handleSave} disabled={loading}
             className="flex-1 bg-[#DC2626] hover:bg-red-700 text-white py-2 rounded-lg transition text-sm font-semibold flex items-center justify-center gap-2">
             <Save size={15} /> {loading ? 'Saving...' : 'Save'}

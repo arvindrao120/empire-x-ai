@@ -71,25 +71,17 @@ export const DashboardLayout = () => {
             </button>
 
             {/* Settings */}
-            <div className="relative">
-              <button
-                onClick={() => setShowSettings(!showSettings)}
-                className="text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/5"
-              >
-                <Settings size={18} />
-              </button>
-
-              <AnimatePresence>
-                {showSettings && (
-                  <SettingsDropdown onClose={() => setShowSettings(false)} />
-                )}
-              </AnimatePresence>
-            </div>
+            <button
+              onClick={() => navigate('/settings')}
+              className="text-gray-400 cursor-pointer hover:text-white transition-colors p-2 rounded-lg hover:bg-white/5"
+            >
+              <Settings size={18} />
+            </button>
 
             {/* Profile Photo */}
             <div
               className="ml-1 cursor-pointer"
-              onClick={() => setShowSettings(!showSettings)}
+              onClick={() => navigate('/settings')}
             >
               {user?.photos?.[0] ? (
                 <img

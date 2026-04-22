@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { updateProfile, logout } from '../api/index';
 import EditPopup from '../components/settings/EditPopup';
+import { SectionCard, InfoRow } from '../components/settings/SettingCards';
 import {
   User, AtSign, Mail, CreditCard, Calendar, Cake, Venus, MapPin,
   Facebook, BadgeCheck, Bell, LogOut, Trash2, Crown, ShieldAlert
 } from 'lucide-react';
 
-export default function Setting() {
+export default function Settings() {
   const { user, setUser } = useAuth();
   const [popup, setPopup] = useState(null);
   const [notifications, setNotifications] = useState(true);
@@ -30,7 +31,6 @@ export default function Setting() {
 
   return (
     <div className="p-4 md:p-8 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold text-white mb-6">Profile Settings</h1>
 
       {/* Profile Info */}
       <SectionCard title="Profile Info">
@@ -42,18 +42,15 @@ export default function Setting() {
           />
           <div>
             <p className="text-white text-sm font-medium">{user?.displayName}</p>
-            <p className="text-gray-500 text-xs flex items-center gap-1">
-              <Facebook size={11} /> Photo Facebook se aata hai
-            </p>
+
           </div>
         </div>
         <InfoRow label="Display Name" value={user?.displayName}
           onEdit={() => openPopup('displayName', 'Display Name')} />
         <InfoRow label="Username" value={user?.username ? `@${user.username}` : null}
           onEdit={() => openPopup('username', 'Username', 'Lowercase only, unique across platform')} />
-        <InfoRow label="Email" value={user?.email}
-          onEdit={() => openPopup('email', 'Email', 'Must be unique — not used by anyone else')} />
-        <InfoRow label="Ad Account ID" value={user?.adAccountId} editable={false} />
+
+
         <InfoRow label="Birthday" value={user?.birthday} editable={false} />
         <InfoRow label="Gender" value={user?.gender} editable={false} />
         <InfoRow label="Location" value={user?.location} editable={false} />
@@ -72,6 +69,9 @@ export default function Setting() {
             year: 'numeric', month: 'long', day: 'numeric'
           }) : '—'
         } editable={false} />
+
+       
+
         <div className="pt-3">
           <button className="w-full border border-[#DC2626] text-[#DC2626] hover:bg-[#DC2626] hover:text-white py-2 rounded-lg transition text-sm font-semibold flex items-center justify-center gap-2">
             <Crown size={15} /> Upgrade Plan
@@ -87,6 +87,8 @@ export default function Setting() {
           </span>
         } editable={false} />
         <InfoRow label="Ad Account ID" value={user?.adAccountId || 'Not set'} editable={false} />
+        <InfoRow label="Email" value={user?.email}
+          onEdit={() => openPopup('email', 'Email', 'Must be unique — not used by anyone else')} />
       </SectionCard>
 
       {/* Preferences */}
@@ -108,18 +110,17 @@ export default function Setting() {
       </SectionCard>
 
       {/* Danger Zone */}
-      <SectionCard title="Danger Zone">
-        <div className="flex flex-col gap-3 pt-1">
-          <button onClick={handleLogout}
-            className="w-full border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 py-2 rounded-lg transition text-sm flex items-center justify-center gap-2">
-            <LogOut size={15} /> Logout
-          </button>
-          <button
-            className="w-full border border-red-800 text-red-500 hover:bg-red-900/20 py-2 rounded-lg transition text-sm flex items-center justify-center gap-2">
-            <Trash2 size={15} /> Delete Account
-          </button>
-        </div>
-      </SectionCard>
+
+      <div>
+        
+        <button onClick={handleLogout}
+          className="w-full border border-red-800 text-red-500 hover:bg-red-900/20 py-2 rounded-lg cursor-pointer transition text-sm flex items-center justify-center ">
+          <LogOut size={15} /> Logout
+        </button>
+
+      </div>
+
+
 
       {popup && (
         <EditPopup
