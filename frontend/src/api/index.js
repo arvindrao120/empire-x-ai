@@ -8,6 +8,8 @@ const API = axios.create({
 // Auth
 export const getMe = () => API.get('/auth/me');
 export const logout = () => API.get('/auth/logout');
+export const login = (formData) => API.post('/auth/login', formData);
+export const register = (data) => API.post('/auth/register', data);
 
 // AI
 export const generateStrategy = (formData) => API.post('/api/ai/generate-strategy', formData);
@@ -18,7 +20,7 @@ export const createCampaign = (data) => API.post('/api/campaigns/create', data);
 export const getCampaigns = () => API.get('/api/campaigns');
 
 // Profile
-export const updateProfile = (data) => API.put('/api/user/profile', data);
+export const updateProfile = (data) => API.put('auth/update-profile', data);
 
 
 

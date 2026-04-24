@@ -4,8 +4,7 @@ import { updateProfile, logout } from '../api/index';
 import EditPopup from '../components/settings/EditPopup';
 import { SectionCard, InfoRow } from '../components/settings/SettingCards';
 import {
-  User, AtSign, Mail, CreditCard, Calendar, Cake, Venus, MapPin,
-  Facebook, BadgeCheck, Bell, LogOut, Trash2, Crown, ShieldAlert
+  BadgeCheck, Bell, LogOut, Crown, User, Link, SlidersHorizontal
 } from 'lucide-react';
 
 export default function Settings() {
@@ -30,37 +29,44 @@ export default function Settings() {
   };
 
   return (
-    <div className="p-4 md:p-8 max-w-2xl mx-auto">
+    <div className="p-4 md:p-8 max-w-4xl mx-auto">
 
-      {/* Profile Info */}
-      <SectionCard title="Profile Info">
-        <div className="flex items-center gap-4 pb-4 border-b border-gray-800 mb-1">
+      {/* Profile Header */}
+      <div className="flex items-center gap-5 mb-8 p-5 bg-[#0f0f0f] border border-gray-800/60 rounded-2xl shadow-lg shadow-black/20">
+        <div className="relative">
           <img
             src={user?.photos?.[0] || `https://ui-avatars.com/api/?name=${user?.displayName}&background=DC2626&color=fff`}
             alt="profile"
-            className="w-14 h-14 rounded-full object-cover border-2 border-gray-700"
+            className="w-16 h-16 rounded-full object-cover border-2 border-gray-700"
           />
-          <div>
-            <p className="text-white text-sm font-medium">{user?.displayName}</p>
-
+          <span className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-[#0f0f0f]" />
+        </div>
+        <div>
+          <h1 className="text-white font-bold text-xl">{user?.displayName}</h1>
+          <p className="text-gray-500 text-sm">{user?.username ? `@${user.username}` : 'No username set'}</p>
+          <div className="flex items-center gap-1.5 mt-1">
+            <Crown size={12} className="text-yellow-400" />
+            <span className="text-yellow-400 text-xs capitalize">{user?.plan || 'Free'} Plan</span>
           </div>
         </div>
+      </div>
+
+      {/* Profile Info */}
+      <SectionCard title="Profile Info" icon={<User size={13} />}>
         <InfoRow label="Display Name" value={user?.displayName}
           onEdit={() => openPopup('displayName', 'Display Name')} />
         <InfoRow label="Username" value={user?.username ? `@${user.username}` : null}
           onEdit={() => openPopup('username', 'Username', 'Lowercase only, unique across platform')} />
-
-
         <InfoRow label="Birthday" value={user?.birthday} editable={false} />
         <InfoRow label="Gender" value={user?.gender} editable={false} />
         <InfoRow label="Location" value={user?.location} editable={false} />
       </SectionCard>
 
       {/* Account Settings */}
-      <SectionCard title="Account Settings">
+      <SectionCard title="Account Settings" icon={<Crown size={13} />}>
         <InfoRow label="Current Plan" value={
           <span className="flex items-center gap-1.5">
-            <Crown size={13} className="text-yellow-400" />
+            <Crown size={12} className="text-yellow-400" />
             <span className="capitalize">{user?.plan || 'Free'}</span>
           </span>
         } editable={false} />
@@ -69,21 +75,18 @@ export default function Settings() {
             year: 'numeric', month: 'long', day: 'numeric'
           }) : '—'
         } editable={false} />
-
-       
-
-        <div className="pt-3">
-          <button className="w-full border border-[#DC2626] text-[#DC2626] hover:bg-[#DC2626] hover:text-white py-2 rounded-lg transition text-sm font-semibold flex items-center justify-center gap-2">
-            <Crown size={15} /> Upgrade Plan
+        <div className="col-span-2 pt-3">
+          <button className="w-full border border-[#DC2626]/60 text-[#DC2626] hover:bg-[#DC2626] hover:text-white py-2.5 rounded-xl transition-all duration-200 text-sm font-semibold flex items-center justify-center gap-2">
+            <Crown size={15} /> Upgrade to Pro
           </button>
         </div>
       </SectionCard>
 
       {/* Connected Accounts */}
-      <SectionCard title="Connected Accounts">
+      <SectionCard title="Connected Accounts" icon={<Link size={13} />}>
         <InfoRow label="Facebook" value={
           <span className="flex items-center gap-1.5">
-            <BadgeCheck size={14} className="text-green-400" /> Connected
+            <BadgeCheck size={13} className="text-green-400" /> Connected
           </span>
         } editable={false} />
         <InfoRow label="Ad Account ID" value={user?.adAccountId || 'Not set'} editable={false} />
@@ -92,35 +95,28 @@ export default function Settings() {
       </SectionCard>
 
       {/* Preferences */}
-      <SectionCard title="Preferences">
-        <div className="flex items-center justify-between py-3 border-b border-gray-800">
-          <div className="flex items-center gap-2">
+      <SectionCard title="Preferences" icon={<SlidersHorizontal size={13} />}>
+        <div className="col-span-2 flex items-center justify-between py-3">
+          <div className="flex items-center gap-2.5">
             <Bell size={15} className="text-gray-400" />
             <div>
-              <p className="text-gray-500 text-xs">Notifications</p>
-              <p className="text-white text-sm mt-0.5">Email & Push</p>
+              <p className="text-white text-sm">Notifications</p>
+              <p className="text-gray-500 text-xs">Email & Push alerts</p>
             </div>
           </div>
           <button
             onClick={() => setNotifications(!notifications)}
-            className={`w-10 h-5 rounded-full relative transition-colors ${notifications ? 'bg-[#DC2626]' : 'bg-gray-700'}`}>
-            <span className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-all ${notifications ? 'right-0.5' : 'left-0.5'}`} />
+            className={`w-11 h-6 rounded-full relative transition-colors duration-300 ${notifications ? 'bg-[#DC2626]' : 'bg-gray-700'}`}>
+            <span className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all duration-300 ${notifications ? 'right-1' : 'left-1'}`} />
           </button>
         </div>
       </SectionCard>
 
-      {/* Danger Zone */}
-
-      <div>
-        
-        <button onClick={handleLogout}
-          className="w-full border border-red-800 text-red-500 hover:bg-red-900/20 py-2 rounded-lg cursor-pointer transition text-sm flex items-center justify-center ">
-          <LogOut size={15} /> Logout
-        </button>
-
-      </div>
-
-
+      {/* Logout */}
+      <button onClick={handleLogout}
+        className="w-full mt-2 border border-red-900/50 text-red-500 hover:bg-red-950/30 hover:border-red-700 py-2.5 rounded-xl transition-all duration-200 text-sm flex items-center justify-center gap-2">
+        <LogOut size={15} /> Logout
+      </button>
 
       {popup && (
         <EditPopup

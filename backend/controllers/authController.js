@@ -220,7 +220,7 @@ export const updateProfile = async (req, res) => {
     const updated = await User.findByIdAndUpdate(
       userId,
       { ...(displayName && { displayName }), ...(email && { email }), ...(username && { username }) },
-      { new: true, runValidators: true }
+      { returnDocument: 'after', runValidators: true }
     ).select('-accessToken -password');
 
     return res.status(200).json({ success: true, data: updated });

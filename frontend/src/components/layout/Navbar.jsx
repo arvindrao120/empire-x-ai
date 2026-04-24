@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { ProfilePopup } from '../common/ProfilePopup.jsx';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const bottomNavItems = [
   { label: 'Home', href: '#', icon: Home },
@@ -18,9 +19,10 @@ const bottomNavItems = [
 export const Navbar = () => {
   const { user, loading } = useAuth();
   const [showProfile, setShowProfile] = useState(false);
+  const navigate = useNavigate();
 
-  const handleFacebookLogin = () => {
-    window.location.href = `${import.meta.env.VITE_API_URL}/auth/facebook`;
+  const handleLoginClick = () => {
+    navigate('/login');
   };
 
   return (
@@ -71,7 +73,7 @@ export const Navbar = () => {
                 </div>
               ) : (
                 <Button
-                  onClick={handleFacebookLogin}
+                  onClick={handleLoginClick}
                   variant="primary"
                   size="md"
                   className="gap-2 cursor-pointer flex"

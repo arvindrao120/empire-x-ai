@@ -70,13 +70,13 @@ export const DashboardLayout = () => {
               <Bell size={18} />
             </button>
 
-            {/* Settings */}
+            {/* Settings
             <button
               onClick={() => navigate('/settings')}
               className="text-gray-400 cursor-pointer hover:text-white transition-colors p-2 rounded-lg hover:bg-white/5"
             >
               <Settings size={18} />
-            </button>
+            </button> */}
 
             {/* Profile Photo */}
             <div

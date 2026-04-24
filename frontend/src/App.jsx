@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Landing } from './pages/Landing';
+import { Login } from './pages/Login';
 import { Dashboard } from './pages/Dashboard';
 import { ProtectedRoute } from './components/common/ProtectedRoute';
 import { DashboardLayout } from './components/dashboard/DashboardLayout';
@@ -14,6 +15,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
 
         <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
           <Route path="/dashboard" element={<Dashboard />} />

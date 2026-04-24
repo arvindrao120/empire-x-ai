@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema(
     username: {
       type: String,
       unique: true,
-      sparse: true, 
+      sparse: true,
       trim: true,
       lowercase: true
     },
@@ -45,35 +45,38 @@ const UserSchema = new mongoose.Schema(
       default: true,
     },
     accessToken: {
-      type: String,        
+      type: String,
     },
     birthday: {
-      type: String,        
+      type: String,
     },
     gender: {
-      type: String,        
+      type: String,
     },
     location: {
-      type: String,        
+      type: String,
     },
     hometown: {
-      type: String,        
+      type: String,
     },
     adAccountId: {
-      type: String,        
+      type: String,
     },
     adAccountName: {
-      type: String,        
+      type: String,
     },
-
-    // Platform plan
     plan: {
       type: String,
       enum: ["free", "basic", "pro", "enterprise"],
       default: "free",
     },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
+    },
     planExpiresAt: {
-      type: Date,          
+      type: Date,
     },
   },
   { timestamps: true },
