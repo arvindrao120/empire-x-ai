@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { updateProfile, logout } from '../api/index';
+import { updateProfile, logout,getMe } from '../api/index';
 import EditPopup from '../components/settings/EditPopup';
 import { SectionCard, InfoRow } from '../components/settings/SettingCards';
 import {
@@ -16,11 +16,12 @@ export default function Settings() {
     setPopup({ field, label, value: user?.[field], note });
   };
 
-  const handleSave = async (val) => {
-    const res = await updateProfile({ [popup.field]: val });
-    if (!res.data.success) throw new Error(res.data.message);
-    setUser(res.data.data);
-  };
+const handleSave = async (val) => {
+  const res = await updateProfile({ [popup.field]: val });
+  if (!res.data.success) throw new Error(res.data.message);
+  const fresh = await getMe();
+  setUser(fresh.data.data);
+};
 
   const handleLogout = async () => {
     await logout();

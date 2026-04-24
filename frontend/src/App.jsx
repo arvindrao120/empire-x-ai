@@ -9,6 +9,7 @@ import AIStrategy from './components/dashboard/sidebar/AIStrategy';
 import Analytics from './components/dashboard/sidebar/Analytics';
 import AdAccount from './components/dashboard/sidebar/AdAccount';
 import Settings from './pages/Setting';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/ad-account" element={<AdAccount />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/admin" element={<Admin />} />
         </Route>
       </Routes>
     </Router>

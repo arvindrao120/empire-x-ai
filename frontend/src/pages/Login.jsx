@@ -5,13 +5,23 @@ import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
 import { login } from '../api/index.js';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext.jsx';
+
+
+
 
 export const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+
+  const [error, setError] = useState('');
+
   const navigate = useNavigate();
+
+
+  const { setUser } = useAuth();
 
   const handleFacebookLogin = () => {
     window.location.href = `${import.meta.env.VITE_API_URL}/auth/facebook`;
@@ -27,16 +37,15 @@ export const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     try {
-      const res = await login(formData)
-      console.log(res.data);
-
+      const res = await login(formData);
       if (res.data.success) {
-        navigate('/dashboard')
+        setUser(res.data.data);
+        navigate('/dashboard');
       }
-
     } catch (error) {
-      console.log(error);
+      setError('Incorrect email or password');
     }
   };
 

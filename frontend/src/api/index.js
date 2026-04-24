@@ -22,6 +22,14 @@ export const getCampaigns = () => API.get('/api/campaigns');
 // Profile
 export const updateProfile = (data) => API.put('auth/update-profile', data);
 
+//Admin routes
+// Admin
+export const getAdminStats = () => API.get('/api/admin/stats');
+export const getAdminUsers = () => API.get('/api/admin/users');
+export const getAdminCampaigns = () => API.get('/api/admin/campaigns');
+export const updateUserPlan = (id, plan) => API.put(`/api/admin/users/${id}/plan`, { plan });
+export const deleteAdminUser = (id) => API.delete(`/api/admin/users/${id}`);
+
 
 
 export default API;
