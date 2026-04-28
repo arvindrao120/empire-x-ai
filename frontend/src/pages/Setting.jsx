@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { updateProfile, logout,getMe } from '../api/index';
+import { updateProfile, logout, getMe } from '../api/index';
 import EditPopup from '../components/settings/EditPopup';
 import { SectionCard, InfoRow } from '../components/settings/SettingCards';
 import {
-  BadgeCheck, Bell, LogOut, Crown, User, Link, SlidersHorizontal
+  BadgeCheck, Bell, LogOut, Crown, User, Link, SlidersHorizontal, ShieldAlert
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Settings() {
   const { user, setUser } = useAuth();
@@ -16,12 +17,14 @@ export default function Settings() {
     setPopup({ field, label, value: user?.[field], note });
   };
 
-const handleSave = async (val) => {
-  const res = await updateProfile({ [popup.field]: val });
-  if (!res.data.success) throw new Error(res.data.message);
-  const fresh = await getMe();
-  setUser(fresh.data.data);
-};
+  const navigate = useNavigate()
+
+  const handleSave = async (val) => {
+    const res = await updateProfile({ [popup.field]: val });
+    if (!res.data.success) throw new Error(res.data.message);
+    const fresh = await getMe();
+    setUser(fresh.data.data);
+  };
 
   const handleLogout = async () => {
     await logout();
@@ -112,6 +115,15 @@ const handleSave = async (val) => {
           </button>
         </div>
       </SectionCard>
+
+      {user?.role === 'admin' && (
+        <button
+          onClick={() => navigate('/admin')}
+          className="w-full mt-2 border border-[#DC2626]/60 text-[#DC2626] hover:bg-[#DC2626] hover:text-white py-2.5 rounded-xl transition-all duration-200 text-sm flex items-center justify-center gap-2 mb-2">
+          <ShieldAlert size={15} /> Admin Panel
+        </button>
+      )}
+
 
       {/* Logout */}
       <button onClick={handleLogout}

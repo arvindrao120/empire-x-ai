@@ -34,20 +34,23 @@ export const Login = () => {
       [name]: value
     }));
   };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    try {
-      const res = await login(formData);
-      if (res.data.success) {
-        setUser(res.data.data);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError('');
+  try {
+    const res = await login(formData);
+    if (res.data.success) {
+      setUser(res.data.data);
+      if (res.data.data.role === 'admin') {
+        navigate('/admin');
+      } else {
         navigate('/dashboard');
       }
-    } catch (error) {
-      setError('Incorrect email or password');
     }
-  };
+  } catch (error) {
+    setError('Incorrect email or password');
+  }
+};
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">

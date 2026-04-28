@@ -59,7 +59,7 @@ export const registerUser = async (req, res, next) => {
     }
 };
 
-// Local Login controller
+//  Login controller
 export const loginUser = async (req, res, next) => {
     try {
         const { email, password } = req.body;
@@ -92,7 +92,7 @@ export const loginUser = async (req, res, next) => {
             { id: user._id },
             process.env.JWT_SECRET || "fallback_secret",
             {
-                expiresIn: "1h",
+                expiresIn: "7d",
             },
         );
 
@@ -100,7 +100,7 @@ export const loginUser = async (req, res, next) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-            maxAge: 60 * 60 * 1000 // 1 hour
+            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         });
 
         return res.status(200).json({
@@ -109,7 +109,7 @@ export const loginUser = async (req, res, next) => {
             data: {
                 id: user._id,
                 email: user.email,
-                name: user.name
+                name: user.name, role: user.role
             }
         });
     } catch (err) {
@@ -165,9 +165,20 @@ export const logoutUser = (req, res, next) => {
 
 // Facebook callback controller
 export const facebookCallback = (req, res) => {
-    // For Facebook OAuth, a redirect to frontend URL works best
+    const token = jwt.sign(
+        { id: req.user._id },
+        process.env.JWT_SECRET || "fallback_secret",
+        { expiresIn: "7d" }
+    );
+
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+        maxAge: 7 * 24 * 60 * 60 * 1000
+    });
+
     const frontendUrl = process.env.FRONTEND_URL || "";
-    // Successful authentication, redirect to frontend application
     res.redirect(`${frontendUrl}/dashboard`);
 };
 
@@ -197,40 +208,40 @@ export const getMe = async (req, res, next) => {
 
 // Update Profile controller
 export const updateProfile = async (req, res) => {
-  try {
-    const { displayName, email, username } = req.body;
-    const userId = req.user._id;
+    try {
+        const { displayName, email, username } = req.body;
+        const userId = req.user._id;
 
-    // Email unique check
-    if (email) {
-      const emailExists = await User.findOne({ email, _id: { $ne: userId } });
-      if (emailExists) {
-        return res.status(400).json({ success: false, message: "Email already in use by another account" });
-      }
+        // Email unique check
+        if (email) {
+            const emailExists = await User.findOne({ email, _id: { $ne: userId } });
+            if (emailExists) {
+                return res.status(400).json({ success: false, message: "Email already in use by another account" });
+            }
+        }
+
+        // Username unique check
+        if (username) {
+            const usernameExists = await User.findOne({ username, _id: { $ne: userId } });
+            if (usernameExists) {
+                return res.status(400).json({ success: false, message: "Username already taken" });
+            }
+        }
+
+        const updated = await User.findByIdAndUpdate(
+            userId,
+            { ...(displayName && { displayName }), ...(email && { email }), ...(username && { username }) },
+            { returnDocument: 'after', runValidators: true }
+        ).select('-accessToken -password');
+
+        return res.status(200).json({ success: true, data: updated });
+
+    } catch (err) {
+        console.error("Update Profile Error:", err);
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error during profile update",
+            error: process.env.NODE_ENV === "development" ? err.message : undefined
+        });
     }
-
-    // Username unique check
-    if (username) {
-      const usernameExists = await User.findOne({ username, _id: { $ne: userId } });
-      if (usernameExists) {
-        return res.status(400).json({ success: false, message: "Username already taken" });
-      }
-    }
-
-    const updated = await User.findByIdAndUpdate(
-      userId,
-      { ...(displayName && { displayName }), ...(email && { email }), ...(username && { username }) },
-      { returnDocument: 'after', runValidators: true }
-    ).select('-accessToken -password');
-
-    return res.status(200).json({ success: true, data: updated });
-
-  } catch (err) {
-    console.error("Update Profile Error:", err);
-    return res.status(500).json({
-      success: false,
-      message: "Internal server error during profile update",
-      error: process.env.NODE_ENV === "development" ? err.message : undefined
-    });
-  }
 };

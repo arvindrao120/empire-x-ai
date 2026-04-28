@@ -62,3 +62,47 @@ export const deleteUser = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
+
+
+// User Detail
+export const getUserDetail = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select('-accessToken -password');
+    const campaignsCount = await Campaign.countDocuments({ user: req.params.id });
+    const launchedCount = await Campaign.countDocuments({ user: req.params.id, status: 'active' });
+    const strategiesCount = await AIStrategy.countDocuments({ user: req.params.id });
+
+    res.json({
+      success: true,
+      data: {
+        ...user.toObject(),
+        campaignsCount,
+        launchedCount,
+        strategiesCount
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+
+// Update User
+export const updateUser = async (req, res) => {
+  try {
+    const { displayName, email, username, plan, adAccountId, birthday, gender, location } = req.body;
+
+    const emailExists = await User.findOne({ email, _id: { $ne: req.params.id } });
+    if (emailExists) return res.status(400).json({ success: false, message: 'Email already in use' });
+
+    const updated = await User.findByIdAndUpdate(
+      req.params.id,
+      { displayName, email, username, plan, adAccountId, birthday, gender, location },
+      { new: true }
+    ).select('-accessToken -password');
+
+    res.json({ success: true, data: updated });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};

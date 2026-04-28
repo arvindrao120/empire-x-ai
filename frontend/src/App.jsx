@@ -25,8 +25,13 @@ function App() {
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/ad-account" element={<AdAccount />} />
           <Route path="/settings" element={<Settings />} />
-          <Route path="/admin" element={<Admin />} />
         </Route>
+
+        <Route path="/admin" element={
+          <ProtectedRoute>
+            <Admin />
+          </ProtectedRoute>
+        } />
       </Routes>
     </Router>
   );

@@ -83,6 +83,10 @@ app.use("/", indexRoutes);
 app.use('/api/campaigns', campaignRoutes);
 app.use("/api/admin", adminRoutes);
 
+//Health Route
+app.get("/health", (req, res) => {
+  res.json({ success: true, message: "Server is running!" });
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

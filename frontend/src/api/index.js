@@ -29,6 +29,8 @@ export const getAdminUsers = () => API.get('/api/admin/users');
 export const getAdminCampaigns = () => API.get('/api/admin/campaigns');
 export const updateUserPlan = (id, plan) => API.put(`/api/admin/users/${id}/plan`, { plan });
 export const deleteAdminUser = (id) => API.delete(`/api/admin/users/${id}`);
+export const getAdminUserDetail = (id) => API.get(`/api/admin/users/${id}`);
+export const adminUpdateUser = (id, data) => API.put(`/api/admin/users/${id}/update`, data);
 
 
 

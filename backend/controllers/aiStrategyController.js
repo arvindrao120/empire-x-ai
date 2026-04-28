@@ -77,7 +77,7 @@ export const generateStrategy = async (req, res) => {
 
 export const getStrategies = async (req, res) => {
   try {
-    const strategies = await AIStrategy.find()
+    const strategies = await AIStrategy.find({ user: req.user._id })
       .populate("campaign", "campaignName")
       .sort({ createdAt: -1 });
 

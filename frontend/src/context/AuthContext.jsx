@@ -7,11 +7,11 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-useEffect(() => {
+  useEffect(() => {
   getMe()
     .then(res => {
-// console.log("User data:", res.data); 
-     setUser(res.data.data);
+      console.log("getMe response:", res.data); 
+      setUser(res.data.data);
     })
     .catch((err) => {
       console.log("Error:", err);
