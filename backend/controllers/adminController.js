@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import Campaign from "../models/Campaign.js";
+import AIStrategy from '../models/AIStrategy.js';
 
 // Stats
 export const getStats = async (req, res) => {

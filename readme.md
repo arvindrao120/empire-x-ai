@@ -11,7 +11,7 @@
 * **Modular Analytics Dashboard:** Dynamic, highly animated analytics layouts for a premium data review experience.
 * **Campaign Oversight & Data Model:** Comprehensive tracking for Facebook/Meta campaigns, ad sets, budgets, and real-time operations, backed by a robust Mongoose schema.
 * **Consistent & Responsive UI:** A seamless sidebar and responsive navigation mapping across all core routes, guaranteeing a native-like experience on any screen.
-* **Role/Plan Tracking:** Dynamic tracking between user access levels seamlessly mapped in the MongoDB user schema.
+* **Admin & User Settings Panel:** Dedicated admin views for managing users, tracking roles, and comprehensive settings for profile customization.
 
 ## 🛠️ Tech Stack
 
@@ -84,10 +84,10 @@ Your React app will typically spin up at `http://localhost:5173`. Clicking login
 empire-x-ai/
 ├── backend/                  # Express server & API endpoints
 │   ├── config/               # Passport and DB configurations
-│   ├── controllers/          # Business logic (e.g., Auth, Ads, AI)
+│   ├── controllers/          # Business logic (e.g., Auth, Ads, AI, Admin, Settings)
 │   ├── middlewares/          # Custom request middlewares
-│   ├── models/               # Mongoose schemas (User, Campaigns, etc)
-│   ├── routes/               # Modular Express router files (ai.js, auth.js, campaign.js)
+│   ├── models/               # Mongoose schemas (User, Campaign, AIStrategy)
+│   ├── routes/               # Modular Express router files (ai.js, auth.js, campaign.js, admin.js)
 │   ├── utils/                # Utility helpers (db.js)
 │   ├── views/                # EJS server side templates
 │   ├── app.js                # Core Express application entry point
@@ -99,14 +99,16 @@ empire-x-ai/
 │   │   ├── api/              # Axios configuration & standardized fetch calls
 │   │   ├── assets/           # Media and global static files
 │   │   ├── components/       # Reusable modular components
+│   │   │   ├── admin/        # Admin panel components
 │   │   │   ├── analytics/    # Animated Charts, Metrics, Demographics
 │   │   │   ├── campaigns/    # Active operations, AI Command Form
 │   │   │   ├── common/       # Access control and shared UI elements
 │   │   │   ├── dashboard/    # Core layout, Home elements, Sidebar setup
 │   │   │   ├── layout/       # App-wide visual shells (Navigation, Container)
-│   │   │   └── sections/     # Modular Landing Page sections
+│   │   │   ├── sections/     # Modular Landing Page sections
+│   │   │   └── settings/     # User settings and profile management
 │   │   ├── context/          # React Context Providers (AuthContext)
-│   │   ├── pages/            # Core routing views (Dashboard, Campaigns, Landing)
+│   │   ├── pages/            # Core routing views (Dashboard, Campaigns, Landing, Login, Admin, Setting)
 │   │   ├── utils/            # Animation variants and tailwind mergings
 │   │   ├── App.jsx           # Master router orchestrator
 │   │   ├── main.jsx          # React DOM mounting
@@ -120,7 +122,7 @@ empire-x-ai/
 * Sensitive route access on the frontend is explicitly wrapped by a `<ProtectedRoute>` layout requiring active Session/JWT context.
 * API rate limiting and standard CORS protocols protect the resource backend.
 * Meta OAuth tokens are processed directly server-side and are NEVER needlessly exposed to client JavaScript. 
+* Admin routes are protected to ensure only authenticated administrative users have access to system-wide data.
 
 ---
 **Author:** Arvind Yadav  
-

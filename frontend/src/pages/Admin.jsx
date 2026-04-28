@@ -71,16 +71,16 @@ export default function Admin() {
         </div>
         <div className="flex items-center gap-3">
           <span className="text-gray-500 text-xs hidden md:block">
-            Logged in as <span className="text-white font-medium">{user?.displayName}</span>
+            Logged in as  <span className="text-white font-medium">{user?.displayName}</span>
           </span>
           <button
             onClick={() => navigate('/dashboard')}
-            className="flex items-center gap-2 border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 px-4 py-2 rounded-xl text-sm transition-all">
+            className="flex items-center gap-2 border border-gray-700 cursor-pointer text-gray-400 hover:text-white hover:border-gray-500 px-4 py-2 rounded-xl text-sm transition-all">
             <ArrowLeft size={15} /> Go to Platform
           </button>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 border border-red-900/50 text-red-500 hover:bg-red-950/30 hover:border-red-700 px-4 py-2 rounded-xl text-sm transition-all">
+            className="flex items-center gap-2 border border-red-900/50 cursor-pointer text-red-500 hover:bg-red-950/30 hover:border-red-700 px-4 py-2 rounded-xl text-sm transition-all">
             <LogOut size={15} /> Logout
           </button>
         </div>
@@ -95,7 +95,7 @@ export default function Admin() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm transition-all duration-200 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm transition-all cursor-pointer duration-200 ${
                 activeTab === tab.id
                   ? 'bg-[#DC2626] text-white font-semibold'
                   : 'text-gray-500 hover:text-white'

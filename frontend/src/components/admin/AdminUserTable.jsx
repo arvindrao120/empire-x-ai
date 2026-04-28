@@ -68,7 +68,7 @@ export default function AdminUserTable({ users, onRefresh, onViewDetail }) {
           </thead>
           <tbody>
             {filtered?.map(u => (
-              <tr key={u._id} className="border-b border-gray-800/50 hover:bg-white/[0.02] transition">
+              <tr onClick={() => onViewDetail(u)} key={u._id} className="border-b border-gray-800/50 hover:bg-white/[0.02] transition">
                 <td className="px-5 py-3">
                   <div className="flex items-center gap-3">
                     <img
