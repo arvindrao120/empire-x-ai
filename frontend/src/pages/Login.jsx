@@ -20,8 +20,9 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
+const { setUser, refetchUser } = useAuth();
 
-  const { setUser } = useAuth();
+
 
   const handleFacebookLogin = () => {
     window.location.href = `${import.meta.env.VITE_API_URL}/auth/facebook`;
@@ -34,13 +35,15 @@ export const Login = () => {
       [name]: value
     }));
   };
+
+
 const handleSubmit = async (e) => {
   e.preventDefault();
   setError('');
   try {
     const res = await login(formData);
     if (res.data.success) {
-      setUser(res.data.data);
+      await refetchUser(); // DB se fresh data
       if (res.data.data.role === 'admin') {
         navigate('/admin');
       } else {

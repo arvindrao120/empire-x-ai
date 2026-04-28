@@ -9,7 +9,10 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 export default function Settings() {
-  const { user, setUser } = useAuth();
+
+
+  const { user, setUser, refetchUser } = useAuth();
+
   const [popup, setPopup] = useState(null);
   const [notifications, setNotifications] = useState(true);
 
@@ -19,12 +22,12 @@ export default function Settings() {
 
   const navigate = useNavigate()
 
+
   const handleSave = async (val) => {
     const res = await updateProfile({ [popup.field]: val });
     if (!res.data.success) throw new Error(res.data.message);
-    const fresh = await getMe();
-    setUser(fresh.data.data);
-  };
+    await refetchUser();
+  }
 
   const handleLogout = async () => {
     await logout();

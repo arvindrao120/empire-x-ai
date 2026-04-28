@@ -1,4 +1,6 @@
 import dotenv from "dotenv";
+dotenv.config(); // Load env vars first
+
 import express from "express";
 import session from "express-session";
 import passport from "passport";
@@ -6,87 +8,77 @@ import path from "path";
 import { fileURLToPath } from "url";
 import cookieParser from "cookie-parser";
 import dns from "dns";
+import cors from 'cors';
 import connectDB from "./utils/db.js";
 import "./config/passport.js";
 import authRoutes from "./routes/auth.js";
 import indexRoutes from "./routes/index.js";
-import authenticateJWT from "./middlewares/authMiddleware.js";
-import cors from 'cors';
+import userRoutes from "./routes/auth.js";
 import aiRoutes from './routes/ai.js';
 import campaignRoutes from './routes/campaign.js';
 import adminRoutes from "./routes/admin.js";
-
-
-
+import authenticateJWT from "./middlewares/authMiddleware.js";
 
 const app = express();
-
-
-
-app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true
-}));
-dns.setServers(["1.1.1.1", "8.8.8.8"])
 
 // Convert import.meta.url to __dirname equivalent
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Load env vars
-dotenv.config();
+// Set custom DNS servers
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
+// Connect to MongoDB
+connectDB();
 
-// Passport Config
+// CORS - must be before all routes
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
 
-
-
-
-// Database Connection
-connectDB()
-
-
-// Middleware
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views")); // Explicitly set views directory
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: false }));
+// Core middleware - order matters
+app.use(cookieParser()); // Parse cookies before JWT middleware
 app.use(express.json());
-app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
 
-// Session
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  }),
-);
+// View engine setup
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
-// Passport init
+// Session setup
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+}));
+
+// Passport initialization
 app.use(passport.initialize());
 app.use(passport.session());
 
-// JWT Authentication Middleware
+// JWT Authentication - runs on every request
 app.use(authenticateJWT);
 
-// Global vars to access user in views
+// Make user available in views
 app.use((req, res, next) => {
   res.locals.user = req.user || null;
   next();
 });
 
-// Routes
-app.use("/auth", authRoutes);
-app.use("/api/ai", aiRoutes);
-app.use("/", indexRoutes);
-app.use('/api/campaigns', campaignRoutes);
-app.use("/api/admin", adminRoutes);
-
-//Health Route
+// Health check route
 app.get("/health", (req, res) => {
   res.json({ success: true, message: "Server is running!" });
 });
+
+// API Routes
+app.use("/auth", authRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/ai", aiRoutes);
+app.use("/api/campaigns", campaignRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/", indexRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
