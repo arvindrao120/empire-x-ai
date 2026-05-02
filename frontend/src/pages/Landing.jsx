@@ -4,7 +4,7 @@ import { HeroSection } from '../components/sections/HeroSection';
 import { WorkflowSection } from '../components/sections/WorkflowSection';
 import { FeaturesSection } from '../components/sections/FeaturesSection';
 import { PricingSection } from '../components/sections/PricingSection';
-import { LockSection } from '../components/sections/LockSection';
+// import { LockSection } from '../components/sections/LockSection';
 
 export const Landing = () => {
   return (
@@ -16,7 +16,7 @@ export const Landing = () => {
         <WorkflowSection />
         <FeaturesSection />
         <PricingSection />
-        <LockSection />
+        {/* <LockSection /> */}
       </main>
       
       <Footer />

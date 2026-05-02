@@ -69,13 +69,13 @@ export const SettingsDropdown = ({ onClose }) => {
         </button>
 
         {/* Security */}
-        <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all">
+        <button className="w-full flex cursor-pointer items-center gap-3 px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all">
           <Shield size={16} />
           <span className="text-sm font-semibold">Security</span>
         </button>
 
         {/* Help */}
-        <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all">
+        <button className="w-full flex items-center cursor-pointer gap-3 px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all">
           <HelpCircle size={16} />
           <span className="text-sm font-semibold">Help & Support</span>
         </button>
@@ -85,7 +85,7 @@ export const SettingsDropdown = ({ onClose }) => {
         {/* Logout */}
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-red-400 hover:text-white hover:bg-[#DC2626] transition-all"
+          className="w-full cursor-pointer flex items-center gap-3 px-3 py-2.5 rounded-xl text-red-400 hover:text-white hover:bg-[#DC2626] transition-all"
         >
           <LogOut size={16} />
           <span className="text-sm font-semibold">Logout</span>

@@ -55,7 +55,12 @@ export const Navbar = () => {
               <ThemeToggle />
 
               {user ? (
-                <div className="relative cursor-pointer" onClick={() => setShowProfile(!showProfile)}>
+                <div className="flex items-center gap-4">
+                  <Button onClick={() => navigate('/dashboard')} variant="primary" size="md" className="hidden sm:flex gap-2 cursor-pointer">
+                    <LayoutDashboard size={15} />
+                    <span className="text-xs tracking-wider">Dashboard</span>
+                  </Button>
+                  <div className="relative cursor-pointer" onClick={() => setShowProfile(!showProfile)}>
                   {user.photos && user.photos.length > 0 ? (
                     <img
                       src={user.photos[0]}
@@ -70,6 +75,7 @@ export const Navbar = () => {
                   {showProfile && (
                     <ProfilePopup onClose={() => setShowProfile(false)} />
                   )}
+                </div>
                 </div>
               ) : (
                 <Button

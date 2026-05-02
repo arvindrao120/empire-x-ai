@@ -14,7 +14,7 @@ export const Button = ({
   const baseStyles = "inline-flex items-center justify-center font-medium rounded-md transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none";
   
   const variants = {
-    primary: "bg-primary text-white hover:bg-primaryDark shadow-[0_0_15px_rgba(255,107,107,0.3)] hover:shadow-[0_0_25px_rgba(255,107,107,0.5)]",
+    primary: "bg-primary text-white hover:bg-primaryDark shadow-[0_0_15px_rgba(255,107,107,0.3)] hover:shadow-[0_0_25px_rgba(255,107,107,0.5)] ",
     secondary: "bg-cardAlt text-textMain hover:bg-sectionAlt border border-border-color/[var(--border-opacity)]",
     outline: "border border-textMain/20 text-textMain hover:bg-black/5 dark:hover:bg-white/5",
     ghost: "text-textMuted hover:text-textMain hover:bg-black/5 dark:hover:bg-white/5",

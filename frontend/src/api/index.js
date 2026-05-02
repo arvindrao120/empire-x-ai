@@ -23,7 +23,7 @@ export const getCampaigns = () => API.get('/api/campaigns');
 export const updateProfile = (data) => API.put('auth/update-profile', data);
 
 //Admin routes
-// Admin
+
 export const getAdminStats = () => API.get('/api/admin/stats');
 export const getAdminUsers = () => API.get('/api/admin/users');
 export const getAdminCampaigns = () => API.get('/api/admin/campaigns');
