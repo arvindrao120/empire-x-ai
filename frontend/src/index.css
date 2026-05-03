@@ -16,22 +16,7 @@
 
 /* Light Mode — Red & White */
 :root {
-  --background: 255 255 255;
-  --card: 248 248 248;
-  --card-hover: 240 240 240;
-  --primary: 220 38 38;
-  --primary-dark: 185 28 28;
-  --text-main: 10 10 10;
-  --text-muted: 100 100 110;
-  --border-color: 0 0 0;
-  --border-opacity: 0.08;
-  --section-alt: 245 245 245;
-  --card-alt: 252 252 252;
-}
-
-/* Dark Mode — Red & Black */
-.dark {
-  --background: 8 8 8;
+ --background: 8 8 8;
   --card: 14 14 14;
   --card-hover: 20 20 20;
   --primary: 220 38 38;
@@ -43,6 +28,21 @@
   --section-alt: 5 5 5;
   --card-alt: 18 18 18;
 }
+
+/* Dark Mode — Red & Black */
+/* .dark {
+  --background: 8 8 8;
+  --card: 14 14 14;
+  --card-hover: 20 20 20;
+  --primary: 220 38 38;
+  --primary-dark: 185 28 28;
+  --text-main: 255 255 255;
+  --text-muted: 160 160 170;
+  --border-color: 255 255 255;
+  --border-opacity: 0.06;
+  --section-alt: 5 5 5;
+  --card-alt: 18 18 18;
+} */
 
 body {
   background-color: rgb(var(--background));
